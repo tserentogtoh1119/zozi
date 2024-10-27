@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>хайртай шүү</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff8f0;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+        }
+        .cake {
+            max-width: 100%;
+            width: 180px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: black;
+        }
+        .button {
+            display: inline-block;
+            background-color: #ffb6c1;
+            color: black;
+            padding: 8px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+        .button:hover {
+            background-color: #ff85c0;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        #loginModal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 100;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #loginModal h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        #passwordInput {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            width: 80%;
+            max-width: 250px;
+        }
+        #loginModal button {
+            padding: 8px 20px;
+            font-size: 1em;
+            color: black;
+            background-color: #ffb6c1;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #errorMessage {
+            color: #ff7f7f;
+            margin-top: 10px;
+            font-size: 0.9em;
+            display: none;
+        }
+        #videoModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        #videoModal iframe {
+            width: 90%;
+            max-width: 600px;
+            height: 300px;
+            margin: auto;
+            display: block;
+        }
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Нууц код оруулах цонх -->
+    <div id="loginModal">
+        <h2>Зозигийн зүрхэнд нэвтрэх код оруулна уу:</h2>
+        <input type="password" id="passwordInput" placeholder="Нэвтрэх код" onkeypress="checkEnter(event)" />
+        <button onclick="checkPassword()">Нэвтрэх</button>
+        <p id="errorMessage">Буруу нууц код байна!</p>
+    </div>
+
+    <!-- Мэндчилгээний хуудас -->
+    <div id="greetingContent" style="display: none;">
+        <h1>bro end neg heden vg shiwne zayu ng joohoon vg</h1>
+        <p>end bas heden vg</p>
+        <p>end bas</p>
+        <p>end ingeed 4 mor um shiwne</p>
+        <img src="https://media1.tenor.com/m/naWX8j8QzYsAAAAC/milk-and-mocha-milk-and-mocha-bear.gif" alt="Birthday Cake" class="cake">
+        
+        <div class="fireworks">
+            <img src="https://media.tenor.com/TKGL8YjZTnEAAAAi/mimibubu.gif" alt="Fireworks" style="max-width: 80%; height: auto;">
+        </div>
+
+        <div class="footer">
+            <p>Чамдаа зөндөө их хайртай шүү,<br>Чиний Зози🥺🥺🥺</p>
+            <a href="#" class="button" onclick="playVideo()">Хайр илгээе (энд дараарай🥺)</a>
+        </div>
+    </div>
+
+    <!-- Video Modal хэсэг -->
+    <div id="videoModal">
+        <iframe id="myVideo" src="https://www.youtube.com/embed/Y7HBvRSY9rU" frameborder="0" allowfullscreen></iframe>
+        <button id="closeButton" onclick="closeVideo()">✖</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("passwordInput").value;
+            if (password === "zozi") {
+                document.getElementById("loginModal").style.display = "none";
+                document.getElementById("greetingContent").style.display = "block";
+            } else {
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+        function checkEnter(event) {
+            if (event.key === "Enter") checkPassword();
+        }
+        function playVideo() {
+            document.getElementById("videoModal").style.display = "flex";
+        }
+        function closeVideo() {
+            document.getElementById("videoModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
